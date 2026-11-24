@@ -2,17 +2,21 @@
 
 클라우드 데이터베이스 12주차 실습: 개발환경 구성 및 AWS 정적 웹 배포.
 
+배포 주소: https://dudm4oq85apan.cloudfront.net
+
 ## 이번 구현
 
-- 밝은 배경과 남색 포인트의 반응형 원페이지
-- 소개, 프로젝트/활동, 연락처
-- 프로젝트 상세 창, Esc 닫기, 포커스 복귀
-- GitHub·블로그 새 탭 열기, 이메일 작성 연결
-- 외부 라이브러리나 빌드 과정 없이 `index.html`로 실행
+- 학술 개인 페이지 스타일의 미니멀한 반응형 원페이지 (about · projects · contact)
+- 이름 아래 3색 그라데이션 구분선, 소개 문단
+- 프로젝트 목록: 분류 라벨(PROJECT · ACTIVITY · STUDY)별 포인트 색(파랑 · 초록 · 주황), 마우스 오버 강조
+- 프로젝트 상세 창(DETAIL): 항목별 색, 글머리표 정리, Esc 닫기, 포커스 복귀
+- contact 섹션: 이메일 작성 연결, GitHub·블로그 새 탭 열기
+- 글꼴: 본문 Pretendard(jsDelivr), 영문 제목 DM Serif Display(Google Fonts)
+- 빌드 과정 없이 `index.html` 한 파일로 실행 (JS 라이브러리 없음)
 
 ## 개발·배포 흐름
 
-ChatGPT Work/Codex → GitHub 소스 관리 → S3 파일 업로드 → CloudFront HTTPS 배포.
+ChatGPT Work/Codex · Claude Code → GitHub 소스 관리 → S3 파일 업로드 → CloudFront HTTPS 배포.
 
 1. `index.html`을 수정하고 GitHub에 커밋합니다.
 2. 같은 파일을 S3 버킷 루트에 업로드합니다.
@@ -29,7 +33,7 @@ GitHub는 소스 관리에 사용합니다. 향후 `CloudFront/S3 → API Gatewa
 
 현재는 1주차 정적 화면이며 DB, API, Lambda는 아직 구현하지 않았습니다. 소개·프로젝트 데이터는 HTML/JavaScript에 포함됩니다.
 향후 profile/projects/activities 테이블, 조회 전용 DB 사용자, 비공개 RDS, Lambda 보안 그룹 접근 제한, CloudFront 출처 CORS를 적용합니다.
-공개 가능한 프로필 사진이 제공되지 않아 현재 이니셜 그래픽을 사용합니다. 확인되지 않은 활동 기간·정량 성과는 기재하지 않았습니다.
+프로필 사진 영역 없이 텍스트 중심으로 구성했습니다. 확인되지 않은 활동 기간·정량 성과는 기재하지 않았습니다.
 
 ## 검증 항목
 
@@ -37,7 +41,8 @@ GitHub는 소스 관리에 사용합니다. 향후 `CloudFront/S3 → API Gatewa
 - S3 객체 직접 주소는 AccessDenied
 - S3 Block Public Access 4개 항목 활성화
 - CloudFront 원본 OAC 및 배포 ARN 제한 버킷 정책
-- 프로젝트 상세 보기, 닫기/Esc, 메뉴 이동, 연락처 링크
+- 프로젝트 상세 보기(DETAIL), 닫기/Esc, 메뉴 이동, 연락처 링크
+- GitHub의 `index.html`과 배포된 파일 내용 일치
 
 ## 로컬 확인
 
